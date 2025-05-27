@@ -1,0 +1,11 @@
+{
+	"openapi": "3.0.0",
+	"paths": {
+		"/api/metadata/descendant-list": {
+			"get": {
+				"operationId": "getDescendantList",
+				"summary": "Get a list of all descendants"
+			}
+		}
+	}
+}
