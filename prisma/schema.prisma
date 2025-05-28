@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Descendant {
+  id                   Int              @id @default(autoincrement())
+  updatedAt            DateTime         @default(now())
+  descendant_id        String
+  descendant_name      String
+  descendant_group_id  String
+  descendant_image_url String
+  descendant_stats     DescendantStat[]
+  descendant_skill     DescendantSkill[]
+}
+
+model DescendantSkill {
+  id                Int         @id @default(autoincrement())
+  skill_type        String
+  skill_name        String
+  element_type      String
+  arche_type        String?
+  skill_image_url   String
+  skill_description String
+  descendantId      Int?
+  Descendant        Descendant? @relation(fields: [descendantId], references: [id])
+}
+
+model DescendantStat {
+  id           Int          @id @default(autoincrement())
+  level        Int
+  descendantId Int?
+  Descendant   Descendant?  @relation(fields: [descendantId], references: [id])
+  stat_detail  StatDetail[]
+}
+
+model StatDetail {
+  id                Int             @id @default(autoincrement())
+  stat_id           String
+  descendant_statId Int?
+  stat_value        Float
+  descendant_stat   DescendantStat? @relation(fields: [descendant_statId], references: [id])
+}
