@@ -1,22 +1,34 @@
 import { PrismaGlobalClient } from '@/lib/prisma';
 import { Stat } from '@/types/stats';
-import { NextResponse } from 'next/server';
+import { after } from 'next/server';
 
 const prisma = PrismaGlobalClient;
 const url = process.env.NEXT_PUBLIC_NEXON_STATS_LIST as string;
 const api_key = process.env.NEXT_PUBLIC_NEXON_API_KEY as string;
 export async function GET() {
-	const dbStats = await GetStatsDB();
-	const externalStats = await GetStatsExternal();
-	for (const stat of externalStats) {
-		const match = dbStats.find((dbStat) => dbStat.stat_id === stat.stat_id);
-		if (match) {
-			UpdateStat(match, stat);
-		} else {
-			CreateStat(stat);
+	const response = new Response(
+		JSON.stringify({
+			message: 'Data processed successfully',
+			timestamp: new Date().toISOString(),
+		}),
+		{
+			headers: { 'Content-Type': 'application/json' },
+		},
+	);
+	after(async () => {
+		const dbStats = await GetStatsDB();
+		const externalStats = await GetStatsExternal();
+		for (const stat of externalStats) {
+			const match = dbStats.find((dbStat) => dbStat.stat_id === stat.stat_id);
+			if (match) {
+				UpdateStat(match, stat);
+			} else {
+				CreateStat(stat);
+			}
 		}
-	}
-	return NextResponse.json({ message: 'success' });
+	});
+
+	return response;
 }
 async function CreateStat(externalStat: Stat) {
 	await prisma.stats.create({
