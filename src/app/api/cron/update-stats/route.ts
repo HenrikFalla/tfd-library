@@ -18,7 +18,6 @@ export async function GET() {
 	after(async () => {
 		const dbStats = await GetStatsDB();
 		const externalStats = await GetStatsExternal();
-		console.log(externalStats);
 		for (const stat of externalStats) {
 			console.log('Stat: ', stat);
 			const match = dbStats.find((dbStat) => dbStat.stat_id === stat.stat_id);
@@ -34,9 +33,10 @@ export async function GET() {
 	return response;
 }
 async function CreateStat(externalStat: Stat) {
-	await prisma.stats.create({
+	const newStat = await prisma.stats.create({
 		data: externalStat,
 	});
+	console.log('New stat: ', newStat);
 	return 'success';
 }
 async function UpdateStat(dbStat: Stat, externalStat: Stat) {
