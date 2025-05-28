@@ -22,22 +22,24 @@ export function DescendantList() {
 		fetchDescendants();
 	}, []);
 	return (
-		<div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-12 p-4'>
+		<div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-8 xl:grid-cols-12 p-4'>
 			{descendants.map((item) => {
 				return (
-					<div
+					<figure
 						key={item.descendant_id}
-						className='flex col-span-1 flex-col items-center justify-center gap-2'
+						className='flex col-span-1 flex-col items-center justify-start gap-2'
 					>
 						<Image
 							src={item.descendant_image_url}
 							width={100}
 							height={100}
-							alt={item.descendant_name}
-							className='rounded-md border-2 border-gray-300 w-full h-full'
+							alt={`Descendant ${item.descendant_name}`}
+							className='rounded-4xl border-2 border-gray-700/25 dark:border-gray-300/25 w-full h-auto'
 						/>
-						{item.descendant_name}
-					</div>
+						<figcaption className='w-full text-center'>
+							{item.descendant_name}
+						</figcaption>
+					</figure>
 				);
 			})}
 		</div>
