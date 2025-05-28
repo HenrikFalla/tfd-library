@@ -1,14 +1,25 @@
 import { PrismaGlobalClient } from '@/lib/prisma';
 import type { Descendant, DescendantList } from '@/types/descendant-list';
-import { NextResponse } from 'next/server';
+import { after } from 'next/server';
 
 const url = process.env.NEXT_PUBLIC_NEXON_DESCENDANT_LIST as string;
 const api_key = process.env.NEXT_PUBLIC_NEXON_API_KEY as string;
 const prisma = PrismaGlobalClient;
 
 export async function GET() {
-	await UpdateDescendants();
-	return NextResponse.json({ message: 'Success' });
+	const response = new Response(
+		JSON.stringify({
+			message: 'Data processed successfully',
+			timestamp: new Date().toISOString(),
+		}),
+		{
+			headers: { 'Content-Type': 'application/json' },
+		},
+	);
+	after(async () => {
+		await UpdateDescendants();
+	});
+	return response;
 }
 async function UpdateDescendants() {
 	const externalData = (await GetDescendantsExternal()) as DescendantList;
