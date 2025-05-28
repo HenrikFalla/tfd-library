@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 const prisma = PrismaGlobalClient;
 const url = process.env.NEXT_PUBLIC_NEXON_STATS_LIST as string;
 const api_key = process.env.NEXT_PUBLIC_NEXON_API_KEY as string;
-export async function POST() {
+export async function GET() {
 	const dbStats = await GetStatsDB();
 	const externalStats = await GetStatsExternal();
 	for (const stat of externalStats) {

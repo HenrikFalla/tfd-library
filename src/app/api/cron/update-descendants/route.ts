@@ -6,7 +6,7 @@ const url = process.env.NEXT_PUBLIC_NEXON_DESCENDANT_LIST as string;
 const api_key = process.env.NEXT_PUBLIC_NEXON_API_KEY as string;
 const prisma = PrismaGlobalClient;
 
-export async function POST() {
+export async function GET() {
 	await UpdateDescendants();
 	return NextResponse.json({ message: 'Success' });
 }
