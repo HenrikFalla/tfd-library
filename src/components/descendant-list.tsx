@@ -1,12 +1,14 @@
 'use client';
 import type { Descendant, DescendantList } from '@/types/descendant-list';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 export function DescendantList() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [descendants, setDescendants] = useState<DescendantList>([]);
+	const ref = useRef(null);
+	const isInView = useInView(ref, { once: true });
 	const variants = {
 		hidden: { opacity: 0 },
 		visible: {
@@ -46,6 +48,7 @@ export function DescendantList() {
 			variants={variants}
 			initial='hidden'
 			animate='visible'
+			ref={ref}
 		>
 			{descendants.map((item) => {
 				return (
