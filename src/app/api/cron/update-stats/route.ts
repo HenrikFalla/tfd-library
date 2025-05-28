@@ -20,7 +20,9 @@ export async function GET() {
 		const externalStats = await GetStatsExternal();
 		console.log(externalStats);
 		for (const stat of externalStats) {
+			console.log('Stat: ', stat);
 			const match = dbStats.find((dbStat) => dbStat.stat_id === stat.stat_id);
+			console.log('Match: ', match);
 			if (match) {
 				UpdateStat(match, stat);
 			} else {
