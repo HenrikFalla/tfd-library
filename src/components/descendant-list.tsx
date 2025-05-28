@@ -2,9 +2,24 @@
 import type { Descendant, DescendantList } from '@/types/descendant-list';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export function DescendantList() {
+	const [isLoading, setIsLoading] = useState(true);
 	const [descendants, setDescendants] = useState<DescendantList>([]);
+	const variants = {
+		hidden: { opacity: 0 },
+		visible: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.1,
+			},
+		},
+	};
+	const childVariants = {
+		hidden: { opacity: 0, y: 20 },
+		visible: { opacity: 1, y: 0 },
+	};
 	useEffect(() => {
 		const fetchDescendants = async () => {
 			const response = await fetch(`/api/metadata/get-descendants`, {
@@ -20,14 +35,24 @@ export function DescendantList() {
 			);
 		};
 		fetchDescendants();
+		setIsLoading(false);
 	}, []);
-	return (
-		<div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-8 xl:grid-cols-12 p-4'>
+	if (isLoading) {
+		return <div className='p-4 text-center'></div>;
+	}
+	return descendants.length > 0 ? (
+		<motion.section
+			className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-8 xl:grid-cols-12 p-4'
+			variants={variants}
+			initial='hidden'
+			animate='visible'
+		>
 			{descendants.map((item) => {
 				return (
-					<figure
+					<motion.figure
 						key={item.descendant_id}
-						className='flex col-span-1 flex-col items-center justify-start gap-2'
+						className='descendant-box flex col-span-1 flex-col items-center justify-start gap-2'
+						variants={childVariants}
 					>
 						<Image
 							src={item.descendant_image_url}
@@ -39,9 +64,11 @@ export function DescendantList() {
 						<figcaption className='w-full text-center'>
 							{item.descendant_name}
 						</figcaption>
-					</figure>
+					</motion.figure>
 				);
 			})}
-		</div>
+		</motion.section>
+	) : (
+		<div className='p-4 text-center'></div>
 	);
 }
