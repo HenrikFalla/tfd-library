@@ -23,8 +23,10 @@ export async function GET() {
 			const match = dbStats.find((dbStat) => dbStat.stat_id === stat.stat_id);
 			console.log('Match: ', match);
 			if (match) {
+				console.log('Updating stat: ', stat);
 				UpdateStat(match, stat);
 			} else {
+				console.log('Creating stat: ', stat);
 				CreateStat(stat);
 			}
 		}
