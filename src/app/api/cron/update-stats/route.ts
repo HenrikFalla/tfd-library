@@ -1,5 +1,6 @@
 import { PrismaGlobalClient } from '@/lib/prisma';
 import { Stat } from '@/types/stats';
+import { NextResponse } from 'next/server';
 
 const prisma = PrismaGlobalClient;
 const url = process.env.NEXT_PUBLIC_NEXON_STATS_LIST as string;
@@ -15,7 +16,7 @@ export async function POST() {
 			CreateStat(stat);
 		}
 	}
-	return 'success';
+	return NextResponse.json({ message: 'success' });
 }
 async function CreateStat(externalStat: Stat) {
 	await prisma.stats.create({
