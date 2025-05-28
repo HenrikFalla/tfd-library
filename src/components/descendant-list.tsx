@@ -62,7 +62,7 @@ export function DescendantList() {
 							width={100}
 							height={100}
 							alt={`Descendant ${item.descendant_name}`}
-							className='rounded-4xl border-2 border-gray-700/25 dark:border-gray-300/25 w-full h-auto'
+							className='rounded-4xl border-2 border-gray-700/25 dark:border-gray-300/25 w-full h-auto bg-gray-800/25 dark:bg-gray-300/5'
 						/>
 						<figcaption className='w-full text-center'>
 							{item.descendant_name}

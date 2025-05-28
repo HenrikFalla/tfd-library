@@ -15,8 +15,7 @@ async function UpdateDescendants() {
 	const dbData = await GetDescendantsDB();
 	for (const descendant of externalData) {
 		const match = dbData.find(
-			(dbDescendant) =>
-				dbDescendant.descendant_id === dbDescendant.descendant_id,
+			(dbDescendant) => dbDescendant.descendant_id === descendant.descendant_id,
 		);
 		if (match) {
 			await prisma.descendant.update({

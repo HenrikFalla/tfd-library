@@ -3,6 +3,10 @@
 		{
 			"path": "/api/cron/update-descendants",
 			"schedule": "0 5 * * *"
+		},
+		{
+			"path": "/api/cron/update-stats",
+			"schedule": "0 5 * * *"
 		}
 	]
 }
