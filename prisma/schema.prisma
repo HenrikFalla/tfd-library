@@ -10,7 +10,7 @@ datasource db {
 model Descendant {
   id                   Int               @id @default(autoincrement())
   updatedAt            DateTime          @default(now())
-  descendant_id        String
+  descendant_id        String            @unique
   descendant_name      String
   descendant_group_id  String
   descendant_image_url String
@@ -40,7 +40,7 @@ model DescendantStat {
 
 model StatDetail {
   id                Int             @id @default(autoincrement())
-  stat_id           String
+  stat_id           String          
   descendant_statId Int?
   stat_value        Float
   descendant_stat   DescendantStat? @relation(fields: [descendant_statId], references: [id])
@@ -48,7 +48,7 @@ model StatDetail {
 
 model Stats {
   id            Int    @id @default(autoincrement())
-  stat_id       String
+  stat_id       String @unique
   stat_name     String
   stat_order_no Int
 }

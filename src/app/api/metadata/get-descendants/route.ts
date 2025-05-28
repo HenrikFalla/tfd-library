@@ -7,7 +7,7 @@ export async function GET() {
 	if (dataDB.length > 0) {
 		return NextResponse.json(dataDB);
 	} else {
-		return NextResponse.json('No data found');
+		return NextResponse.json({ message: 'No data found', status: 404 });
 	}
 }
 
