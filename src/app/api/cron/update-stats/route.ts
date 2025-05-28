@@ -24,10 +24,10 @@ export async function GET() {
 			console.log('Match: ', match);
 			if (match) {
 				console.log('Updating stat: ', stat);
-				UpdateStat(match, stat);
+				await UpdateStat(match, stat);
 			} else {
 				console.log('Creating stat: ', stat);
-				CreateStat(stat);
+				await CreateStat(stat);
 			}
 		}
 	});
