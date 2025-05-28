@@ -18,6 +18,7 @@ export async function GET() {
 	after(async () => {
 		const dbStats = await GetStatsDB();
 		const externalStats = await GetStatsExternal();
+		console.log(externalStats);
 		for (const stat of externalStats) {
 			const match = dbStats.find((dbStat) => dbStat.stat_id === stat.stat_id);
 			if (match) {
