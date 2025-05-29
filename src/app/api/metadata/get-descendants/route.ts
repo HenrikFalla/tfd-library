@@ -12,6 +12,10 @@ export async function GET() {
 }
 
 async function GetDescendantsDB() {
-	const response = await prisma.descendant.findMany();
+	const response = await prisma.descendant.findMany({
+		include: {
+			descendant_skill: true,
+		},
+	});
 	return response;
 }
