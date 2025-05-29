@@ -17,6 +17,7 @@ export interface StatDetail {
 	descendant_statId?: number;
 }
 export interface DescendantSkill {
+	id?: number;
 	skill_type: string;
 	skill_name: string;
 	element_type: string;
