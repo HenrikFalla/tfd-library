@@ -1,12 +1,19 @@
 'use client';
-import type { Descendant, DescendantList } from '@/types/descendant-list';
+import type {
+	Descendant,
+	DescendantList,
+	DescendantSkill,
+} from '@/types/descendant-list';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import Skill from './skill-icons';
 
 export function DescendantList() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [descendants, setDescendants] = useState<DescendantList>([]);
+	console.log('Descendant Data: ', descendants);
+	// const isInView = useInView()
 	// const ref = useRef(null);
 	// const isInView = useInView(ref, { once: true });
 	const variants = {
@@ -44,7 +51,7 @@ export function DescendantList() {
 	}
 	return descendants.length > 0 ? (
 		<motion.section
-			className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-8 xl:grid-cols-12 p-4'
+			className='grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-8 p-4'
 			variants={variants}
 			initial='hidden'
 			animate='visible'
@@ -64,6 +71,20 @@ export function DescendantList() {
 							alt={`Descendant ${item.descendant_name}`}
 							className='rounded-4xl border-2 border-gray-700/25 dark:border-gray-300/25 w-full h-auto bg-gray-800/25 dark:bg-gray-300/5'
 						/>
+						<div className='grid grid-cols-5 gap-2 w-full'>
+							{item.descendant_skill
+								.sort((a, b) => {
+									return (a.id ?? 0) > (b.id ?? 0) ? 1 : -1;
+								})
+								.map((skill) => {
+									return (
+										<Skill
+											data={skill as DescendantSkill}
+											key={skill.skill_name}
+										/>
+									);
+								})}
+						</div>
 						<figcaption className='w-full text-center'>
 							{item.descendant_name}
 						</figcaption>
