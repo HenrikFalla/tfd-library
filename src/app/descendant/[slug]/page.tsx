@@ -1,4 +1,5 @@
 import { GET } from '@/app/api/metadata/get-descendant/route';
+import DescendantProfileCard from '@/components/descendant/profile-card';
 import type { Descendant } from '@/types/descendant-list';
 import { NextRequest } from 'next/server';
 
@@ -15,8 +16,10 @@ export default async function Descendant({
 	const descendant = (await response.json()) as Descendant;
 	return (
 		<div>
-			{descendant.descendant_name.charAt(0).toUpperCase() +
-				descendant.descendant_name.slice(1)}
+			<DescendantProfileCard
+				name={descendant.descendant_name}
+				imageUrl={descendant.descendant_image_url}
+			/>
 		</div>
 	);
 }

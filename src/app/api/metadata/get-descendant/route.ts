@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const prisma = PrismaGlobalClient;
 export async function GET(request: NextRequest) {
 	const searchParams = request.nextUrl.searchParams;
-	const name = searchParams.get('name') as string;
+	const name = searchParams.get('name')?.replace('-', ' ') as string; //should be updated to use regex
 	console.log('Name: ', name);
 	// const req = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 	const data = await GetDescendant(name);

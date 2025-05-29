@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
 				hostname: 'open.api.nexon.com',
 				port: '',
 			},
+			{
+				protocol: 'https',
+				hostname: 'rtbjosjluuakkrjx.public.blob.vercel-storage.com',
+				port: '',
+			},
 		],
 	},
 	/* config options here */
