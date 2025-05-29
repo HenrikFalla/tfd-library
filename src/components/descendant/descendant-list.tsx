@@ -7,7 +7,8 @@ import type {
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import Skill from './skill-icons';
+import Skill from '../skill-icons';
+import Link from 'next/link';
 
 export function DescendantList() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -64,30 +65,36 @@ export function DescendantList() {
 						className='descendant-box flex col-span-1 flex-col items-center justify-start gap-2'
 						variants={childVariants}
 					>
-						<Image
-							src={item.descendant_image_url}
-							width={100}
-							height={100}
-							alt={`Descendant ${item.descendant_name}`}
-							className='rounded-4xl border-2 border-gray-700/25 dark:border-gray-300/25 w-full h-auto bg-gray-800/25 dark:bg-gray-300/5'
-						/>
-						<div className='grid grid-cols-5 gap-2 w-full'>
-							{item.descendant_skill
-								.sort((a, b) => {
-									return (a.id ?? 0) > (b.id ?? 0) ? 1 : -1;
-								})
-								.map((skill) => {
-									return (
-										<Skill
-											data={skill as DescendantSkill}
-											key={skill.skill_name}
-										/>
-									);
-								})}
-						</div>
-						<figcaption className='w-full text-center'>
-							{item.descendant_name}
-						</figcaption>
+						<Link
+							href={`/descendant/${item.descendant_name
+								.toLowerCase()
+								.replace(' ', '-')}`}
+						>
+							<Image
+								src={item.descendant_image_url}
+								width={100}
+								height={100}
+								alt={`Descendant ${item.descendant_name}`}
+								className='rounded-4xl border-2 border-gray-700/25 dark:border-gray-300/25 w-full h-auto bg-gray-800/25 dark:bg-gray-300/5'
+							/>
+							<div className='grid grid-cols-5 gap-2 w-full'>
+								{item.descendant_skill
+									.sort((a, b) => {
+										return (a.id ?? 0) > (b.id ?? 0) ? 1 : -1;
+									})
+									.map((skill) => {
+										return (
+											<Skill
+												data={skill as DescendantSkill}
+												key={skill.skill_name}
+											/>
+										);
+									})}
+							</div>
+							<figcaption className='w-full text-center'>
+								{item.descendant_name}
+							</figcaption>
+						</Link>
 					</motion.figure>
 				);
 			})}
