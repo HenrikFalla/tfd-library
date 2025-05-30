@@ -14,7 +14,7 @@ model Descendant {
   descendant_name      String
   descendant_group_id  String
   descendant_image_url String
-  descendant_stats     DescendantStat[]
+  descendant_stat      DescendantStat[]
   descendant_skill     DescendantSkill[]
 }
 

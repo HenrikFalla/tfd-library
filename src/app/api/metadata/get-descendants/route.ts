@@ -15,6 +15,7 @@ async function GetDescendantsDB() {
 	const response = await prisma.descendant.findMany({
 		include: {
 			descendant_skill: true,
+			descendant_stat: true,
 		},
 	});
 	return response;
