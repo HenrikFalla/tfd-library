@@ -27,7 +27,7 @@ async function UpdateDescendants() {
 	for (const descendant of externalData) {
 		const match = dbData.find(
 			(dbDescendant) => dbDescendant.descendant_id === descendant.descendant_id,
-		);
+		) as unknown as Descendant;
 		if (match) {
 			await prisma.descendant.update({
 				where: {
@@ -74,7 +74,7 @@ async function UpdateDescendants() {
 				}
 			}
 			for (const stat of descendant.descendant_stat) {
-				const statMatch = match.descendant_stats.find(
+				const statMatch = match.descendant_stat.find(
 					(dbStat) => dbStat.level === stat.level,
 				);
 				if (statMatch) {
@@ -191,7 +191,7 @@ async function GetDescendantsExternal() {
 async function GetDescendantsDB() {
 	const response = await prisma.descendant.findMany({
 		include: {
-			descendant_stats: {
+			descendant_stat: {
 				include: {
 					stat_detail: true,
 				},

@@ -1,4 +1,5 @@
 export interface Descendant {
+	id?: number;
 	descendant_id: string;
 	descendant_name: string;
 	descendant_group_id: string;
@@ -7,6 +8,7 @@ export interface Descendant {
 	descendant_skill: [DescendantSkill];
 }
 export interface DescendantStat {
+	id?: number;
 	level: number;
 	stat_detail: [StatDetail];
 }
