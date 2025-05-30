@@ -16,7 +16,7 @@ export default function DescendantProfileCard(props: {
 
 	return (
 		<div>
-			<span>{name}</span>
+			<h1>{name}</h1>
 			<Image
 				src={source}
 				alt=''
