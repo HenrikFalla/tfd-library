@@ -21,7 +21,7 @@ async function GetDescendant(name: string) {
 		},
 		include: {
 			descendant_skill: true,
-			descendant_stats: {
+			descendant_stat: {
 				include: {
 					stat_detail: true,
 				},
