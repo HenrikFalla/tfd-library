@@ -61,7 +61,7 @@ model Weapon {
   weapon_type                     String
   weapon_type_id                  String
   weapon_rounds_type              String
-  available_core_slots            String
+  available_core_slots            String[]
   base_stat                       WeaponBaseStat[]
   firearm_atk                     FirearmAtk[]
   weapon_perk_ability_name        String?
