@@ -113,7 +113,7 @@ async function CreateWeapon(weapon: Weapon) {
 			image_url: weapon.image_url,
 			weapon_type: weapon.weapon_type,
 			weapon_type_id: weapon.weapon_type_id,
-			available_core_slots: weapon.available_core_slots.join(','),
+			available_core_slots: weapon.available_core_slots,
 			weapon_rounds_type: weapon.weapon_rounds_type,
 		},
 	});
