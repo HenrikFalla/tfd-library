@@ -59,7 +59,7 @@ async function UpdateWeapon(weapon: Weapon, weaponDB: Weapon) {
 			weapon_type: weapon.weapon_type,
 			weapon_type_id: weapon.weapon_type_id,
 			weapon_rounds_type: weapon.weapon_rounds_type,
-			available_core_slots: weapon.available_core_slots.join(','),
+			available_core_slots: weapon.available_core_slots,
 		},
 	});
 	const updateBaseStat = weapon.base_stat.map((baseStat) => {
