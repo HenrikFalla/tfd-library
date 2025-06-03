@@ -58,8 +58,8 @@ model Weapon {
   weapon_name                     String
   weapon_id                       String           @unique
   image_url                       String
-  weapon_type                     String
-  weapon_type_id                  String
+  weapon_type                     String?
+  weapon_type_id                  String?
   weapon_rounds_type              String
   available_core_slots            String[]
   base_stat                       WeaponBaseStat[]
