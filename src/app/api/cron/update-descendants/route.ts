@@ -9,7 +9,7 @@ const prisma = PrismaGlobalClient;
 export async function GET() {
 	const response = new Response(
 		JSON.stringify({
-			message: 'Data processed successfully',
+			message: 'Processing Descendants started.',
 			timestamp: new Date().toISOString(),
 		}),
 		{
@@ -18,6 +18,7 @@ export async function GET() {
 	);
 	after(async () => {
 		await UpdateDescendants();
+		console.log(`Descendants updated at ${new Date().toISOString()}`);
 	});
 	return response;
 }
